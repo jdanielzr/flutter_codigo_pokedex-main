@@ -3,16 +3,17 @@ import 'package:flutter_codigo_pokedex/models/pokemon_model.dart';
 import 'package:flutter_codigo_pokedex/ui/general/colors.dart';
 import 'package:flutter_codigo_pokedex/ui/widgets/item_data_widget.dart';
 import 'package:flutter_codigo_pokedex/ui/widgets/item_type_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class DetailPage extends StatelessWidget {
-
   PokemonModel pokemon;
 
-  DetailPage({required this.pokemon,});
+  DetailPage({
+    required this.pokemon,
+  });
 
   @override
   Widget build(BuildContext context) {
-
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -60,7 +61,9 @@ class DetailPage extends StatelessWidget {
                       height: 6.0,
                     ),
                     Row(
-                      children: pokemon.type.map((e) => ItemTypeWidget(text: e)).toList(),
+                      children: pokemon.type
+                          .map((e) => ItemTypeWidget(text: e))
+                          .toList(),
                     ),
                   ],
                 ),
@@ -131,8 +134,12 @@ class DetailPage extends StatelessWidget {
                         top: -90.0,
                         child: Align(
                           alignment: Alignment.topCenter,
-                          child: Image.network(
-                            pokemon.img
+                          child: CachedNetworkImage(
+                            imageUrl: pokemon.img,
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),

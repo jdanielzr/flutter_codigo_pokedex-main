@@ -3,6 +3,7 @@ import 'package:flutter_codigo_pokedex/models/pokemon_model.dart';
 import 'package:flutter_codigo_pokedex/pages/detail_page.dart';
 import 'package:flutter_codigo_pokedex/ui/general/colors.dart';
 import 'package:flutter_codigo_pokedex/ui/widgets/item_type_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ItemPokemonWidget extends StatelessWidget {
   // String name;
@@ -10,7 +11,6 @@ class ItemPokemonWidget extends StatelessWidget {
   // List<String> types;
 
   PokemonModel pokemon;
-
 
   ItemPokemonWidget({
     // required this.name,
@@ -22,8 +22,13 @@ class ItemPokemonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage(pokemon: pokemon,)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailPage(
+                      pokemon: pokemon,
+                    )));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -59,15 +64,23 @@ class ItemPokemonWidget extends StatelessWidget {
                   // Column(
                   //   children: types.map((e) => ItemTypeWidget()).toList(),
                   // ),
-                  ...pokemon.type.map((item) => ItemTypeWidget(text: item,)).toList(),
-
+                  ...pokemon.type
+                      .map((item) => ItemTypeWidget(
+                            text: item,
+                          ))
+                      .toList(),
                 ],
               ),
             ),
             Positioned(
               bottom: 0,
               right: 0,
-              child: Image.network(pokemon.img),
+              child: CachedNetworkImage(
+                imageUrl: pokemon.img,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
             ),
           ],
         ),
