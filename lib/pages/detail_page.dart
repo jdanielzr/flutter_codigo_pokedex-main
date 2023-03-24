@@ -5,6 +5,9 @@ import 'package:flutter_codigo_pokedex/ui/widgets/item_data_widget.dart';
 import 'package:flutter_codigo_pokedex/ui/widgets/item_type_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../ui/widgets/item_data_list_widget.dart';
+import '../ui/widgets/item_value_widget.dart';
+
 class DetailPage extends StatelessWidget {
   PokemonModel pokemon;
 
@@ -116,16 +119,36 @@ class DetailPage extends StatelessWidget {
                             ),
                             ItemDataWidget(
                               title: "Weight",
-                              data: "6.9 kg",
+                              data: pokemon.weight,
                             ),
                             ItemDataWidget(
                               title: "Candy",
-                              data: "Bulbasaur Candy",
+                              data: pokemon.candy,
                             ),
                             ItemDataWidget(
                               title: "Candy Count",
-                              data: "25",
+                              data: pokemon.candyCount.toString(),
                             ),
+                            if (pokemon.multipliers.isNotEmpty) ...[
+                              ItemDataListWidget(
+                                title: "Multipliers",
+                                children: pokemon.multipliers
+                                    .map((item) => ItemValueWidget(
+                                          text: item.toString(),
+                                        ))
+                                    .toList(),
+                              ),
+                            ],
+                            if (pokemon.nextEvolution.isNotEmpty) ...[
+                              ItemDataListWidget(
+                                title: "Evolution",
+                                children: pokemon.nextEvolution
+                                    .map((item) => ItemValueWidget(
+                                          text: item.name,
+                                        ))
+                                    .toList(),
+                              )
+                            ],
                           ],
                         ),
                       ),
