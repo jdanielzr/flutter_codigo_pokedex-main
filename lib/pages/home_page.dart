@@ -5,6 +5,8 @@ import 'package:flutter_codigo_pokedex/ui/widgets/item_pokemon_widget.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -21,14 +23,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   getDataPokemon() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     Uri _uri = Uri.parse(
         "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json");
     http.Response response = await http.get(_uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> myMap = json.decode(response.body);
       //pokemons = myMap["pokemon"];
-      pokemonsModel = myMap["pokemon"].map<PokemonModel>((e)=> PokemonModel.fromJson(e)).toList();
-      print(pokemonsModel);
+      pokemonsModel = myMap["pokemon"]
+          .map<PokemonModel>((e) => PokemonModel.fromJson(e))
+          .toList();
+      //print(pokemonsModel);
       setState(() {});
       // pokemons.forEach((element) {
       //   print(element["type"]);
@@ -38,7 +43,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

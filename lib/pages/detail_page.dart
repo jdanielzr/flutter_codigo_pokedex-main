@@ -8,10 +8,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../ui/widgets/item_data_list_widget.dart';
 import '../ui/widgets/item_value_widget.dart';
 
+// ignore: must_be_immutable
 class DetailPage extends StatelessWidget {
   PokemonModel pokemon;
 
   DetailPage({
+    super.key,
     required this.pokemon,
   });
 
@@ -27,7 +29,7 @@ class DetailPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.favorite_border_outlined,
             ),
           ),
@@ -54,7 +56,7 @@ class DetailPage extends StatelessWidget {
                   children: [
                     Text(
                       pokemon.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 36.0,
                         fontWeight: FontWeight.bold,
@@ -72,7 +74,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 Text(
                   "#${pokemon.numPokemon}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -91,7 +93,7 @@ class DetailPage extends StatelessWidget {
                 flex: 8,
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30.0),

@@ -5,6 +5,7 @@ import 'package:flutter_codigo_pokedex/ui/general/colors.dart';
 import 'package:flutter_codigo_pokedex/ui/widgets/item_type_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+// ignore: must_be_immutable
 class ItemPokemonWidget extends StatelessWidget {
   // String name;
   // String image;
@@ -13,6 +14,7 @@ class ItemPokemonWidget extends StatelessWidget {
   PokemonModel pokemon;
 
   ItemPokemonWidget({
+    super.key,
     // required this.name,
     // required this.image,
     // required this.types,
@@ -54,7 +56,7 @@ class ItemPokemonWidget extends StatelessWidget {
                 children: [
                   Text(
                     pokemon.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ItemDataWidget extends StatelessWidget {
   String title;
   String data;
   ItemDataWidget({
+    super.key,
     required this.title,
     required this.data,
   });
@@ -11,12 +13,12 @@ class ItemDataWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 6.0),
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
         children: [
           Text(
             "$title: ",
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black45,
             ),
           ),
